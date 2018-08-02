@@ -28,7 +28,7 @@ server.route({
     }
 });
 
-
+//Add task
 server.route({
     method: 'POST',
     path: '/addTask',
@@ -39,14 +39,25 @@ server.route({
             }
         }
     },
-    handler: function (request, h) {
+   
+    handler: async function (request, h) {
         var task = new taskModel(request.payload);
         
-        task.save(function (error) {
-            if (error) throw error;
-            console.log('Task added Successfully');
-        });
+        return await task.save()
+        }
+});
+
+// Fetching all tasks
+server.route({
+    method: 'GET',
+    path: '/allTask',
+    handler: async function (h) {
+
+        var task = new taskModel();
+      var data  = task.find();
+        return await data;
     }
+    
 });
 
 
