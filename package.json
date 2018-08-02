@@ -1,0 +1,25 @@
+{
+  "name": "backend_todoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^17.5.2",
+    "hapi-mongoose": "^2.0.0",
+    "joi": "^13.4.0",
+    "mongodb": "^3.1.1",
+    "mongoose": "^5.2.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "nodemon": "^1.18.3"
+  }
+}
