@@ -6,6 +6,7 @@ import Joi from 'joi';
 import taskModel from './models/task.model';
 
 
+
 // Create server with host and port 
 
 const server = Hapi.server({
@@ -76,8 +77,9 @@ server.route({
         validate: {
             payload: {
                 name: Joi.string(),
+
                 // status:Joi.string()
-            }
+}
             // payload: Joi.object({
             //     title: Joi.string().min(10).max(50).optional(),
             //     author: Joi.string().min(10).max(50).optional(),
