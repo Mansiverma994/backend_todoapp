@@ -1,4 +1,4 @@
-const Hapi = require('hapi');
+import Hapi from 'hapi';
 const mongoose = require('mongoose');
 const taskRouter = require('./routes/task/');
 const saveTask = require('./services/task.service');
@@ -31,7 +31,7 @@ server.route({
 //Add task
 server.route({
     method: 'POST',
-    path: '/addTask',
+    path: '/',
     config: {
         validate: {
             payload: {
@@ -50,15 +50,49 @@ server.route({
 // Fetching all tasks
 server.route({
     method: 'GET',
-    path: '/allTask',
+    path: '/',
     handler: async function (h) {
-
-        var task = new taskModel();
-      var data  = task.find();
-        return await data;
+        const data  = await taskModel.find();
+        return  data;
     }
-    
+
+});
+//Delete task
+server.route({
+    method: 'DELETE',
+    path: '/{id}',
+    handler: async function (request, reply) {
+        return await taskModel.remove({_id: request.params.id});
+    }
 });
 
+//Update task
+
+
+server.route({
+    method: 'PUT',
+    path: '/{id}',
+    config: {
+        validate: {
+            payload: {
+                name: Joi.string(),
+                status:Joi.string()
+            }
+            // payload: Joi.object({
+            //     title: Joi.string().min(10).max(50).optional(),
+            //     author: Joi.string().min(10).max(50).optional(),
+            //     isbn: Joi.number().optional()
+            // }).required().min(1)
+        }
+    },
+    handler: async function (request, reply) {
+
+        return await taskModel.update({
+            _id: request.params.id
+        }, {
+            $set: request.payload
+        });
+    }
+});
 
 server.start();
