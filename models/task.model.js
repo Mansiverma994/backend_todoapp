@@ -5,11 +5,11 @@ let Schema = mongoose.Schema;
 
 let taskSchema = new Schema({
     name: {type: String},
-    // status: {type: String, enum: ['Active', 'Deactive'], default: 'Active'}
+    // status: {type: String, enum: ['Pending', 'Completed'], default: 'Active'}
 });
 
 
 var task = mongoose.model("task", taskSchema)
 
 
-module.exports = task; 
+module.exports = task;
