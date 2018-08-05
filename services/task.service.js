@@ -1,14 +1,22 @@
+import taskModel from '../models/task.model';
 
-const taskModel = require('../models/task.model');
-
-function saveTask(data, callback) {
-    new taskModel(data).save(callback)
+export async function taskList() {
+    return await taskModel.find();
 }
 
-// const saveTask = function(data, callback) {
-//     console.log(data);
-//     new taskModel(data).save(callback)
-// }
+export async function saveTask(postData) {
+    const task = new taskModel(postData);
+    return await task.save()
+}
 
-// module.exports = saveTask;
-module.exports.saveTask = saveTask;  
+export async function removeTask(id) {
+    return await taskModel.remove({_id: id});
+
+}
+export async function editTask(id, data) {
+    return await taskModel.update({
+        _id: id
+    }, {
+        $set: data
+    });
+}
