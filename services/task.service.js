@@ -4,6 +4,10 @@ export async function taskList() {
     return await taskModel.find();
 }
 
+export async function taskListById(id) {
+    return await taskModel.find({_id: id});
+}
+
 export async function saveTask(postData) {
     const task = new taskModel(postData);
     return await task.save()

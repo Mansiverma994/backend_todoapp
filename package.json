@@ -14,11 +14,11 @@
     "apollo-server": "^2.0.0",
     "apollo-server-hapi": "^1.4.0",
     "graphql": "^0.13.2",
-    "hapi": "^17.5.2",
+    "hapi": "^17.5.3",
     "hapi-mongoose": "^2.0.0",
-    "joi": "^13.4.0",
+    "joi": "^13.5.2",
     "mongodb": "^3.1.1",
-    "mongoose": "^5.2.5"
+    "mongoose": "^5.2.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

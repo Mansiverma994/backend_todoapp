@@ -1,6 +1,6 @@
 import {GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLString} from 'graphql'
 import taskModel from '../grapghQlModel/task'
-import {taskList, saveTask, removeTask, editTask} from '../services/task.service';
+import {taskList, saveTask, removeTask, editTask, taskListById} from '../services/task.service';
 
 const rootQuery = new GraphQLObjectType({
    name : 'RootQuery',
@@ -11,7 +11,16 @@ const rootQuery = new GraphQLObjectType({
              async resolve(parent, args) {
                  return await taskList()
              }
-       }
+       },
+       getTaskListById : {
+        type: GraphQLList(taskModel),
+        args: {
+            id: {type: GraphQLString},
+        },
+        async resolve(parent, args) {
+            return await taskListById(args.id)
+        }
+  }
    }
 })
 

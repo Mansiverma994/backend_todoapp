@@ -1,5 +1,5 @@
 // import {listTasks as lists, addTask as saveTask, deleteTask as removeTask} from '../services/task.service';
-import {taskList, saveTask, removeTask, editTask} from '../services/task.service';
+import {taskList, saveTask, removeTask, editTask, taskListById} from '../services/task.service';
 
 export async function listTasks() {
     return await taskList();
@@ -14,4 +14,7 @@ export async function deleteTask(id) {
 
 export async function updateTask(id, data) {
     return await editTask(id, data);
+}
+export async function getTaskById(id) {
+    return await taskListById(id);
 }

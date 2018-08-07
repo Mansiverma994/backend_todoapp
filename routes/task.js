@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {listTasks, addTask, deleteTask, updateTask} from '../controller/task.controller'
+import {listTasks, addTask, deleteTask, updateTask, getTaskById} from '../controller/task.controller'
 
 const route = [
     {
@@ -28,6 +28,14 @@ const route = [
         path: '/',
         handler: async(h) => {
             return listTasks();
+        }
+
+    },
+    {
+        method: 'GET',
+        path: '/{id}',
+        handler: async(request, h) => {
+            return getTaskById(request.params.id);
         }
 
     },
