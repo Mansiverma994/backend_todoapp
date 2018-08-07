@@ -5,6 +5,7 @@ const taskModel = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
+        status: {type:GraphQLString}
     })
 })
 

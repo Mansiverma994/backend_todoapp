@@ -9,7 +9,14 @@ import config from './config'
 // Create server with host and port
 const server = Hapi.server({
     host: config.host,
-    port: config.port
+    port: config.port,
+    "routes": {
+        "cors": {
+            origin: ["*"],
+            headers: ["Accept", "Content-Type"],
+            additionalHeaders: ["X-Requested-With"]
+        }
+    }
 });
 
 mongoose.connect(config.mongoUrl, {useNewUrlParser: true}, (err) => {

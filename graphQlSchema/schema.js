@@ -1,6 +1,6 @@
-import {GraphQLSchema, GraphQLObjectType, GraphQLList} from 'graphql'
+import {GraphQLSchema, GraphQLObjectType, GraphQLList, GraphQLString} from 'graphql'
 import taskModel from '../grapghQlModel/task'
-import {taskList, saveTask, removeTask} from '../services/task.service';
+import {taskList, saveTask, removeTask, editTask} from '../services/task.service';
 
 const rootQuery = new GraphQLObjectType({
    name : 'RootQuery',
@@ -20,9 +20,34 @@ const rootMutation = new GraphQLObjectType({
     fields: {
         addTask : {
             type: taskModel,
-            args: {},
+            args: {
+                name: {type: GraphQLString},
+            },
             async resolve(parent, args) {
-                return {name: 'prince', id: '123'}
+                return await saveTask(args)
+            }
+        },
+        deleteTask : {
+            type: taskModel,
+            args: {
+                id: {type: GraphQLString},
+            },
+            async resolve(parent, args) {
+                return await removeTask(args.id)
+            }
+        },
+        updateTask : {
+            type: taskModel,
+            args: {
+                id: {type: GraphQLString},
+                name: {type: GraphQLString},
+                status: {type : GraphQLString}
+            },
+            async resolve(parent, {id, name, status}) {
+                return await editTask(id, {
+                    name,
+                    status
+                })
             }
         }
     }
