@@ -1,4 +1,3 @@
-// import {listTasks as lists, addTask as saveTask, deleteTask as removeTask} from '../services/task.service';
 import {taskList, saveTask, removeTask, editTask, taskListById} from '../services/task.service';
 
 export async function listTasks() {

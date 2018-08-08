@@ -18,9 +18,5 @@ export async function removeTask(id) {
 
 }
 export async function editTask(id, data) {
-    return await taskModel.update({
-        _id: id
-    }, {
-        $set: data
-    });
+    return await taskModel.update({_id: id}, {$set: data});
 }

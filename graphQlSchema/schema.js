@@ -3,31 +3,31 @@ import taskModel from '../grapghQlModel/task'
 import {taskList, saveTask, removeTask, editTask, taskListById} from '../services/task.service';
 
 const rootQuery = new GraphQLObjectType({
-   name : 'RootQuery',
-   fields: {
-       getTaskList : {
-             type: GraphQLList(taskModel),
-             args: {},
-             async resolve(parent, args) {
-                 return await taskList()
-             }
-       },
-       getTaskListById : {
-        type: GraphQLList(taskModel),
-        args: {
-            id: {type: GraphQLString},
+    name: 'RootQuery',
+    fields: {
+        getTaskList: {
+            type: GraphQLList(taskModel),
+            args: {},
+            async resolve(parent, args) {
+                return await taskList()
+            }
         },
-        async resolve(parent, args) {
-            return await taskListById(args.id)
+        getTaskListById: {
+            type: GraphQLList(taskModel),
+            args: {
+                id: {type: GraphQLString},
+            },
+            async resolve(parent, args) {
+                return await taskListById(args.id)
+            }
         }
-  }
-   }
+    }
 })
 
 const rootMutation = new GraphQLObjectType({
     name: 'RootMutation',
     fields: {
-        addTask : {
+        addTask: {
             type: taskModel,
             args: {
                 name: {type: GraphQLString},
@@ -36,7 +36,7 @@ const rootMutation = new GraphQLObjectType({
                 return await saveTask(args)
             }
         },
-        deleteTask : {
+        deleteTask: {
             type: taskModel,
             args: {
                 id: {type: GraphQLString},
@@ -45,12 +45,12 @@ const rootMutation = new GraphQLObjectType({
                 return await removeTask(args.id)
             }
         },
-        updateTask : {
+        updateTask: {
             type: taskModel,
             args: {
                 id: {type: GraphQLString},
                 name: {type: GraphQLString},
-                status: {type : GraphQLString}
+                status: {type: GraphQLString}
             },
             async resolve(parent, {id, name, status}) {
                 return await editTask(id, {
@@ -62,7 +62,7 @@ const rootMutation = new GraphQLObjectType({
     }
 })
 
-const schema = new GraphQLSchema ({
+const schema = new GraphQLSchema({
     query: rootQuery,
     mutation: rootMutation
 

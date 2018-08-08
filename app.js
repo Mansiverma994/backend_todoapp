@@ -1,6 +1,8 @@
 import Hapi from 'hapi';
 import mongoose from 'mongoose';
+import {graphqlHapi, graphiqlHapi} from 'apollo-server-hapi';
 
+import schema from './graphQlSchema/schema'
 import taskRoute from './routes/task'
 import config from './config'
 
@@ -22,9 +24,37 @@ mongoose.connect(config.mongoUrl, {useNewUrlParser: true}, (err) => {
     console.log('Mongo Db successfully connected');
 
 });
+const startServer = async() => {
+
+    await server.register({
+        plugin: graphiqlHapi,
+        options: {
+            path: '/graphiql',
+            graphiqlOptions: {
+                endpointURL: '/graphql'
+            },
+            route: {
+                cors: true
+            }
+        }
+    });
+    await server.register({
+        plugin: graphqlHapi,
+        options: {
+            path: '/graphql',
+            graphqlOptions: {
+                schema: schema
+            },
+            route: {
+                cors: true
+            }
+        }
+    });
+
+    await server.route([...taskRoute])
+    await server.start();
 
 
+}
 
-server.route([...taskRoute])
-
-server.start();
+startServer()
