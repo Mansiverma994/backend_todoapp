@@ -5,7 +5,7 @@ export async function taskList() {
 }
 
 export async function taskListById(id) {
-    return await taskModel.find({_id: id});
+    return await taskModel.findOne({_id: id});
 }
 
 export async function saveTask(postData) {

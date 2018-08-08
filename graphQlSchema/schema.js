@@ -13,7 +13,7 @@ const rootQuery = new GraphQLObjectType({
             }
         },
         getTaskListById: {
-            type: GraphQLList(taskModel),
+            type: taskModel,
             args: {
                 id: {type: GraphQLString},
             },
